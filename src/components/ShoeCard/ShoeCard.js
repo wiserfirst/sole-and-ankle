@@ -36,6 +36,7 @@ const ShoeCard = ({
       <Wrapper>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
+          <ImageLabel variant={variant} />
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
@@ -44,6 +45,7 @@ const ShoeCard = ({
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+          {salePrice && <SalePrice>{formatPrice(salePrice)}</SalePrice>}
         </Row>
       </Wrapper>
     </Link>
@@ -55,16 +57,22 @@ const Link = styled.a`
   color: inherit;
 `
 
-const Wrapper = styled.article``
+const Wrapper = styled.article`
+  margin-bottom: 64px;
+`
 
 const ImageWrapper = styled.div`
   position: relative;
 `
 
-const Image = styled.img``
+const Image = styled.img`
+  width: 340px;
+`
 
 const Row = styled.div`
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
 `
 
 const Name = styled.h3`
@@ -78,9 +86,37 @@ const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
 `
 
+const ImageLabel = ({ variant }) => {
+  if (variant === 'on-sale') {
+    return <OnSale>Sale</OnSale>
+  } else if (variant === 'new-release') {
+    return <NewRelease>Just Released!</NewRelease>
+  } else {
+    return null
+  }
+}
+
 const SalePrice = styled.span`
   font-weight: ${WEIGHTS.medium};
   color: ${COLORS.primary};
+`
+
+const Label = styled.span`
+  position: absolute;
+  top: 12px;
+  right: -4px;
+  font-weight: ${WEIGHTS.bold};
+  font-size: 0.875rem;
+  padding: 8px;
+  border-radius: 2px;
+`
+
+const OnSale = styled(Label)`
+  background-color: ${COLORS.primary};
+`
+
+const NewRelease = styled(Label)`
+  background-color: ${COLORS.secondary};
 `
 
 export default ShoeCard
