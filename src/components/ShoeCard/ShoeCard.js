@@ -36,16 +36,27 @@ const ShoeCard = ({
       <Wrapper>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
-          <ImageLabel variant={variant} />
+          {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
+          {variant === 'new-release' && <NewFlag>Just Released!</NewFlag>}
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+          <Price
+            style={{
+              '--color': variant === 'on-sale' ? COLORS.gray[700] : undefined,
+              '--text-decoration':
+                variant === 'on-sale' ? 'line-through' : undefined,
+            }}
+          >
+            {formatPrice(price)}
+          </Price>
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
-          {salePrice && <SalePrice>{formatPrice(salePrice)}</SalePrice>}
+          {variant === 'on-sale' && (
+            <SalePrice>{formatPrice(salePrice)}</SalePrice>
+          )}
         </Row>
       </Wrapper>
     </Link>
@@ -57,16 +68,14 @@ const Link = styled.a`
   color: inherit;
 `
 
-const Wrapper = styled.article`
-  margin-bottom: 64px;
-`
+const Wrapper = styled.article``
 
 const ImageWrapper = styled.div`
   position: relative;
 `
 
 const Image = styled.img`
-  width: 340px;
+  width: 100%;
 `
 
 const Row = styled.div`
@@ -80,42 +89,38 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `
 
-const Price = styled.span``
+const Price = styled.span`
+  color: var(--color);
+  text-decoration: var(--text-decoration);
+`
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
 `
-
-const ImageLabel = ({ variant }) => {
-  if (variant === 'on-sale') {
-    return <OnSale>Sale</OnSale>
-  } else if (variant === 'new-release') {
-    return <NewRelease>Just Released!</NewRelease>
-  } else {
-    return null
-  }
-}
 
 const SalePrice = styled.span`
   font-weight: ${WEIGHTS.medium};
   color: ${COLORS.primary};
 `
 
-const Label = styled.span`
+const Flag = styled.span`
   position: absolute;
   top: 12px;
   right: -4px;
   font-weight: ${WEIGHTS.bold};
   font-size: 0.875rem;
-  padding: 8px;
+  height: 32px;
+  line-height: 32px;
+  color: ${COLORS.white};
+  padding: 0 8px;
   border-radius: 2px;
 `
 
-const OnSale = styled(Label)`
+const SaleFlag = styled(Flag)`
   background-color: ${COLORS.primary};
 `
 
-const NewRelease = styled(Label)`
+const NewFlag = styled(Flag)`
   background-color: ${COLORS.secondary};
 `
 

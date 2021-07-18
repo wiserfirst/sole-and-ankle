@@ -47,7 +47,9 @@ const Wrapper = styled.div`
   align-items: baseline;
 `
 
-const LeftColumn = styled.div``
+const LeftColumn = styled.div`
+  flex-basis: 248px;
+`
 
 const MainColumn = styled.div`
   flex: 1;
@@ -55,12 +57,13 @@ const MainColumn = styled.div`
 
 const Header = styled.header`
   display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 `
 
 const Title = styled.h2`
   font-size: 1.5rem;
   font-weight: ${WEIGHTS.medium};
-  margin-right: auto;
 `
 
 export default ShoeIndex
