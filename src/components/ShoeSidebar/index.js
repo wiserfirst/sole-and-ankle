@@ -1,1 +1,1 @@
-export { default } from './ShoeSidebar';
+export { default } from './ShoeSidebar'

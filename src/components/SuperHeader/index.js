@@ -1,1 +1,1 @@
-export { default } from './SuperHeader';
+export { default } from './SuperHeader'

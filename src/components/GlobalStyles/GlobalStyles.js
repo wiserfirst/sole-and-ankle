@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
 /* http://meyerweb.com/eric/tools/css/reset/
@@ -69,6 +69,6 @@ table {
 html, body, #root {
   height: 100%;
 }
-`;
+`
 
-export default GlobalStyles;
+export default GlobalStyles
